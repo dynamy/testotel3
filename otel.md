@@ -95,12 +95,12 @@ The result of that calculation is getting sent to a Kafka Broker.
 - Line 27 and 34 - Insert // on each line this is the NEW code that we want to introduce
 - This code snippet declares the tracing API for `http` and together with the `context`, Go will `start` the trace for all `http requests` and `end` the trace when the requests completes 
   ```go
-  	tracer := otel.Tracer("http")
-	ctx := context.Background()
+  tracer := otel.Tracer("http")
+  ctx := context.Background()
 
-	var span trace.Span
-	ctx, span = tracer.Start(ctx, "http-request")
-	defer span.End()
+  var span trace.Span
+  ctx, span = tracer.Start(ctx, "http-request")
+  defer span.End()
   ```
 ### Recompile and execute transactions again
 - VS Code Server auto-saves any edits made, however, if you would like to be sure, press `Ctrl-S` to save your changes in `main.go`
@@ -371,11 +371,19 @@ Negative
 
 ### Recompile and execute transactions again
 - VS Code Server auto-saves any edits made, however, if you would like to be sure, press `Ctrl-S` to save your changes in `metrics.go` and `main.go`
-- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, access the http service, using n=8 to differentiate the transactions
+- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, create a series of curl requests like the following
   ```bash
   $ go build
   $ ./fib
+  $ curl http://localhost:28080/fib?n=1
+  $ curl http://localhost:28080/fib?n=2
+  $ curl http://localhost:28080/fib?n=3
+  $ curl http://localhost:28080/fib?n=4
+  $ curl http://localhost:28080/fib?n=5
+  $ curl http://localhost:28080/fib?n=6
+  $ curl http://localhost:28080/fib?n=7
   $ curl http://localhost:28080/fib?n=8
+  $ curl http://localhost:28080/fib?n=9
   ```
 
 Positive
@@ -392,6 +400,7 @@ Positive
     - The name of the API Token can get chosen freely
     - You can now copy the API Token to your clipboard and paste into the String on Line 18 of `metrics.go`
     - ![API Token](../../../assets/images/api_token.png)
+- Line 25 - API URL, environment ID
 - Line 30 - Delete // - this is to INTRODUCE the Dynatrace API token into the code
 - Line 59 - Insert // - this is OLD metric name that we want to remove
 - Line 60 - Delete // - this is NEW metric name that we want to introduce
