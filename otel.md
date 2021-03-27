@@ -69,7 +69,7 @@ The result of that calculation is getting sent to a Kafka Broker.
 - Dynatrace by default has decided to disable monitoring for this executable (`Process isn't monitored`). Click on the link `monitored technologies` and override the defaults for this Process Group.
 - ![Process isn't monitored](../../../assets/images/process_isnt_monitored.png)
 - Within your Terminal press `Ctrl-C` to shut down `fib`. Launch `fib` again. 
-- Fire transactions to access the http service (using n=2 to differentiate the transactions)
+- Fire transactions to access the http service
   ```bash
   $ curl http://localhost:28080/fib?n=1
   ```
@@ -193,8 +193,8 @@ In this task our goal is to grant users of Dynatrace deeper insight into what is
   ![ReqAttributes](../../../assets/images/03-02-OpenTelemetryReqAttributes.gif)
 - In your Terminal access the http service with a few transactions, using n=4 and n=5 to differentiate the transactions
   ```bash
-  $ curl http://localhost:28080/fib?n=4
   $ curl http://localhost:28080/fib?n=5
+  $ curl http://localhost:28080/fib?n=6
   ```
 Positive
 : Why do both n=4 and n=5 produce the same Fibonacci result in the request attribute?
@@ -267,12 +267,12 @@ Second, our solution traces ALL the invocations of the `Calc` function. Trace si
   ```
 ### Recompile and execute transactions again
 - VS Code Server auto-saves any edits made, however, if you would like to be sure, press `Ctrl-S` to save your changes in `main.go`
-- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, access the http service, using n=6 and n=7 to differentiate the transactions
+- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, access the http service, using n=7 and n=8 to differentiate the transactions
   ```bash
   $ go build
   $ ./fib
-  $ curl http://localhost:28080/fib?n=6
   $ curl http://localhost:28080/fib?n=7
+  $ curl http://localhost:28080/fib?n=8
   ```
 
 ### You've arrived
@@ -308,12 +308,12 @@ The idea behind OpenTelemetry is that third party software either already comes 
 
 ### Recompile and execute transactions again
 - VS Code Server auto-saves any edits made, however, if you would like to be sure, press `Ctrl-S` to save your changes in `kafka.go`
-- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, access the http service, using n=6 and n=7 to differentiate the transactions
+- In your Terminal, compile the program using the command line `go build`, launch `fib` and in the other terminal, access the http service, using n=9 and n=10 to differentiate the transactions
   ```bash
   $ go build
   $ ./fib
-  $ curl http://localhost:28080/fib?n=6
-  $ curl http://localhost:28080/fib?n=7
+  $ curl http://localhost:28080/fib?n=9
+  $ curl http://localhost:28080/fib?n=10
   ```
 - The PurePath you just created contains an additional PurePath Node for when the application reaches out to the Kafka Broker
   ![OTelPurepathKafka](../../../assets/images/OTelPurepathKafka.png)
